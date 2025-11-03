@@ -1,1 +1,304 @@
-hello
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PROGRESSIO MULTI TALENT</title>
+  <meta name="description" content="Progressio Multi Talent — Connecting Lifestyle and Technology" />
+  <link rel="icon" href="#pmt-favicon">
+  <style>
+    /* ====== Root & theme colors ====== */
+    :root{
+      --bg:#071026;
+      --panel:#0b1630;
+      --glow-a: #00d4ff; /* bright cyan */
+      --glow-b: #3af27a; /* vivid green */
+      --accent-gradient: linear-gradient(90deg,var(--glow-a),#3fb0ff,var(--glow-b),#ffffff);
+      --text: #e6f6ff;
+      --muted: #9fb7d7;
+      --glass: rgba(255,255,255,0.03);
+    }
+
+    /* ====== Reset & base ====== */
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,'Helvetica Neue',Arial; background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}
+
+    /* ====== layout ====== */
+    .container{max-width:1100px;margin:0 auto;padding:28px}
+    header{position:fixed;left:0;right:0;top:0;z-index:40;backdrop-filter:blur(6px);}
+    .navwrap{display:flex;align-items:center;justify-content:space-between;padding:14px 22px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:56px;height:56px;display:inline-block}
+    .brand h1{font-size:16px;letter-spacing:2px;margin:0;color:var(--text);font-weight:700}
+    nav ul{display:flex;gap:18px;align-items:center;margin:0;padding:0;list-style:none}
+    nav a{font-weight:600;color:var(--muted);padding:8px 10px;border-radius:8px}
+    nav a:hover{color:var(--text);box-shadow:0 0 18px rgba(58,242,122,0.08),0 0 36px rgba(0,212,255,0.04);}
+
+    main{padding-top:110px}
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:36px;align-items:center}
+    .hero-card{padding:48px;border-radius:16px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);box-shadow:0 8px 30px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03)}
+
+    .headline{font-size:40px;line-height:1.02;margin:0 0 12px;background:var(--accent-gradient);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800}
+    .sub{color:var(--muted);margin-bottom:18px}
+    .cta{display:inline-grid;grid-auto-flow:column;gap:12px}
+    .btn{padding:12px 18px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.008));cursor:pointer;color:var(--text);font-weight:700}
+    .btn-glow{box-shadow:0 6px 30px rgba(0,212,255,0.08),0 2px 10px rgba(58,242,122,0.04)}
+
+    .features{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:22px}
+    .feature{padding:18px;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.02), transparent);border:1px solid rgba(255,255,255,0.02)}
+    .feature h3{margin:0 0 8px}
+
+    /* ====== sections ====== */
+    section{padding:60px 0}
+    .section-title{font-size:20px;font-weight:800;margin-bottom:12px}
+    .card{padding:22px;border-radius:12px;background:var(--panel);border:1px solid rgba(255,255,255,0.02)}
+
+    /* ====== contact & footer ====== */
+    .contact-grid{display:grid;grid-template-columns:1fr 320px;gap:20px}
+    footer{padding:28px 0;color:var(--muted);text-align:center}
+
+    /* ====== floating whatsapp ====== */
+    .whatsapp-btn{position:fixed;right:20px;bottom:20px;z-index:80;background:linear-gradient(90deg,var(--glow-a),var(--glow-b));width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 36px rgba(0,212,255,0.12);border:1px solid rgba(255,255,255,0.06)}
+    .whatsapp-btn img{width:26px;height:26px;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.35));}
+
+    /* ====== animations ====== */
+    .fade-up{opacity:0;transform:translateY(12px);animation:su 0.9s cubic-bezier(.2,.9,.2,1) forwards}
+    .delay-1{animation-delay:0.12s}
+    .delay-2{animation-delay:0.26s}
+    .delay-3{animation-delay:0.4s}
+    @keyframes su{to{opacity:1;transform:none}}
+
+    /* responsive */
+    @media (max-width:880px){
+      .hero{grid-template-columns:1fr;}
+      nav ul{display:none}
+    }
+
+    /* small touches: subtle background radial glow */
+    body::before{content:"";position:fixed;left:-10%;top:-10%;width:60vmax;height:60vmax;background:radial-gradient(circle at 10% 20%, rgba(0,212,255,0.06), transparent 10%), radial-gradient(circle at 80% 80%, rgba(58,242,122,0.04), transparent 12%);pointer-events:none;z-index:0}
+
+    /* simple footer link style */
+    .mutelink{color:var(--muted);font-size:13px}
+
+  </style>
+</head>
+<body>
+
+  <!-- SVG favicon + logo (inline) -->
+  <svg id="pmt-favicon" width="0" height="0" xmlns="http://www.w3.org/2000/svg" style="position:absolute">
+    <defs>
+      <linearGradient id="g1" x1="0" x2="1">
+        <stop offset="0%" stop-color="#00d4ff"/>
+        <stop offset="50%" stop-color="#3fb0ff"/>
+        <stop offset="80%" stop-color="#3af27a"/>
+        <stop offset="100%" stop-color="#ffffff"/>
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <header>
+    <div class="container navwrap">
+      <div class="brand">
+        <!-- Inline circular logo with curved text above -->
+        <div class="logo" aria-hidden>
+          <svg viewBox="0 0 200 200" width="56" height="56" xmlns="http://www.w3.org/2000/svg" role="img">
+            <defs>
+              <radialGradient id="rad1" cx="30%" cy="30%">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+                <stop offset="45%" stop-color="#3fb0ff" stop-opacity="0.6"/>
+                <stop offset="100%" stop-color="#071026" stop-opacity="0.1"/>
+              </radialGradient>
+              <linearGradient id="lg" x1="0" x2="1">
+                <stop offset="0%" stop-color="#00d4ff"/>
+                <stop offset="60%" stop-color="#3fb0ff"/>
+                <stop offset="100%" stop-color="#3af27a"/>
+              </linearGradient>
+            </defs>
+            <g>
+              <circle cx="100" cy="100" r="86" fill="none" stroke="url(#lg)" stroke-width="6" opacity="0.95" filter="">
+              </circle>
+              <!-- inner emblem: PMT letters -->
+              <g transform="translate(100,100)">
+                <path d="M-28 10 L-12 -34 L-4 -34 L-18 10 Z" fill="#0b1630" />
+                <!-- stylized P -->
+                <path d="M-38 -20 Q-20 -34 2 -20 Q-20 -6 -38 -20 Z" fill="url(#lg)" opacity="0.95" />
+                <!-- stylized M (simplified) -->
+                <path d="M6 -34 L18 10 L30 -34 L42 10 L42 34 L30 34 L18 -6 L6 34 L-6 34 Z" fill="url(#lg)" opacity="0.9" transform="translate(-6,0) scale(0.45)"/>
+                <!-- small glow circle -->
+                <circle cx="46" cy="-10" r="6" fill="#ffffff" opacity="0.9" />
+              </g>
+            </g>
+            <!-- curved text above circle (small in favicon) -->
+            <text x="50%" y="28" text-anchor="middle" font-size="12" fill="#bfefff" style="font-weight:700;letter-spacing:1px">PMT</text>
+          </svg>
+        </div>
+        <div>
+          <h1>PROGRESSIO MULTI TALENT</h1>
+          <div style="font-size:12px;color:var(--muted);margin-top:2px">Connecting Lifestyle and Technology</div>
+        </div>
+      </div>
+
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- HERO -->
+    <section id="home" class="hero">
+      <div class="hero-card card fade-up delay-1">
+        <h2 class="headline">PROGRESSIO MULTI TALENT</h2>
+        <p class="sub">Connecting Lifestyle and Technology — gabungkan layanan cloud & fashion modern dalam satu ekosistem.</p>
+        <div class="cta">
+          <a class="btn btn-glow" href="#services">Lihat Layanan</a>
+          <a class="btn" href="#contact">Hubungi Kami</a>
+        </div>
+
+        <div class="features">
+          <div class="feature">
+            <h3>Produk Digital & Layanan Teknologi</h3>
+            <p class="muted">RDP, VPS, server cloud, domain, dan hosting handal untuk kebutuhan personal & bisnis.</p>
+          </div>
+          <div class="feature">
+            <h3>Retail & Fashion</h3>
+            <p class="muted">Pakaian kasual dan profesional dengan fokus kenyamanan, kualitas, dan desain modern.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right visual / quick info -->
+      <aside class="card fade-up delay-2" style="align-self:center;">
+        <div style="text-align:center;margin-bottom:10px;">
+          <div style="width:120px;height:120px;margin:0 auto;border-radius:50%;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.04);box-shadow:0 10px 40px rgba(0,212,255,0.04);">
+            <!-- larger emblem for hero -->
+            <svg viewBox="0 0 200 200" width="84" height="84" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+              <defs>
+                <linearGradient id="heroLg" x1="0" x2="1">
+                  <stop offset="0%" stop-color="#00d4ff"/>
+                  <stop offset="60%" stop-color="#3fb0ff"/>
+                  <stop offset="100%" stop-color="#3af27a"/>
+                </linearGradient>
+              </defs>
+              <circle cx="100" cy="100" r="78" fill="none" stroke="url(#heroLg)" stroke-width="6"/>
+              <g transform="translate(100,100)">
+                <text x="0" y="6" text-anchor="middle" font-size="44" fill="url(#heroLg)" font-weight="800">PMT</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+        <div style="text-align:center;color:var(--muted);">Didirikan untuk menggabungkan kenyamanan gaya hidup dan kekuatan teknologi.</div>
+      </aside>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="section-title">Tentang Kami</div>
+      <div class="card fade-up delay-2">
+        <p>PROGRESSIO MULTI TALENT adalah perusahaan yang berfokus pada penyediaan solusi digital dan kebutuhan gaya hidup modern. Kami bergerak di dua lini utama:</p>
+        <ol>
+          <li><strong>Produk Digital & Layanan Teknologi</strong> — penyediaan RDP, VPS, server cloud, domain, dan layanan hosting berkualitas tinggi untuk kebutuhan personal maupun bisnis.</li>
+          <li><strong>Produk Retail & Fashion</strong> — pakaian kasual dan profesional yang mengedepankan kenyamanan, kualitas, dan desain modern.</li>
+        </ol>
+        <p>Didirikan dengan semangat inovasi dan kemudahan akses teknologi, PROGRESSIO MULTI TALENT hadir untuk membantu individu maupun perusahaan berkembang di era digital. Kami percaya bahwa teknologi dan gaya hidup yang dinamis dapat berjalan seimbang — memberikan efisiensi dalam pekerjaan sekaligus kenyamanan dalam kehidupan sehari-hari.</p>
+        <p>Dengan dukungan tim berpengalaman dan mitra terpercaya di bidang IT, kami berkomitmen untuk menyediakan layanan yang aman, cepat, dan fleksibel, serta menghadirkan pengalaman pelanggan terbaik.</p>
+
+        <p style="margin-top:10px;"><strong>Visi:</strong> Menjadi perusahaan multi-sektor terpercaya yang menghubungkan teknologi digital dan gaya hidup modern dalam satu ekosistem terpadu.</p>
+        <p><strong>Misi:</strong></p>
+        <ul>
+          <li>Menyediakan layanan server, RDP, dan VPS dengan performa tinggi serta harga kompetitif.</li>
+          <li>Memberikan kemudahan bagi pengguna dalam akses teknologi berbasis cloud.</li>
+          <li>Menghadirkan produk fashion berkualitas yang merepresentasikan semangat profesional dan progresif.</li>
+          <li>Menjaga kepuasan dan kepercayaan pelanggan melalui pelayanan yang responsif dan transparan.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+      <div class="section-title">Layanan Kami</div>
+      <div class="card fade-up delay-2">
+        <div style="display:flex;gap:18px;flex-wrap:wrap">
+          <div style="flex:1;min-width:240px;padding:18px;border-radius:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.02)">
+            <h3>Produk Digital & Layanan Teknologi</h3>
+            <p class="muted">RDP, VPS, server cloud, domain, dan hosting handal. Dukungan teknis dan setup cepat untuk kebutuhan bisnis.</p>
+          </div>
+          <div style="flex:1;min-width:240px;padding:18px;border-radius:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.02)">
+            <h3>Produk Retail & Fashion</h3>
+            <p class="muted">Pakaian kasual & profesional dengan desain modern dan material berkualitas untuk keseharian maupun acara formal.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="section-title">Hubungi Kami</div>
+      <div class="card fade-up delay-3 contact-grid">
+        <div>
+          <p class="muted">Untuk informasi layanan, kerja sama, atau penawaran, silakan hubungi kami melalui:</p>
+          <p><strong>Email:</strong> <a class="mutelink" href="mailto:progressiomultitalent@gmail.com">progressiomultitalent@gmail.com</a></p>
+          <p><strong>WhatsApp:</strong> <a class="mutelink" href="https://wa.me/6282110709090" target="_blank">+62 821 1070 9090</a></p>
+          <p style="margin-top:12px;color:var(--muted);">Alamat domain tujuan: <strong>progressiomultitalent.cf</strong></p>
+        </div>
+        <aside>
+          <form onsubmit="event.preventDefault();alert('Terima kasih! Kami akan segera menghubungi Anda.');" style="display:flex;flex-direction:column;gap:10px">
+            <input placeholder="Nama" required style="padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text)" />
+            <input placeholder="Email" type="email" required style="padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text)" />
+            <textarea placeholder="Pesan" rows="4" style="padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text)"></textarea>
+            <button class="btn btn-glow" type="submit">Kirim Pesan</button>
+          </form>
+        </aside>
+      </div>
+    </section>
+
+    <footer>
+      <div class="muted">© 2025 Progressio Multi Talent — All Rights Reserved</div>
+    </footer>
+
+  </main>
+
+  <!-- Floating WhatsApp button -->
+  <a class="whatsapp-btn" href="https://wa.me/6282110709090" target="_blank" aria-label="Chat via WhatsApp">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+      <path d="M20.52 3.48A11.96 11.96 0 0012 0C5.373 0 .001 5.373 0 12a11.96 11.96 0 001.6 6.02L0 24l6.1-1.6A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12 0-3.2-1.25-6.16-3.48-8.52z" fill="#ffffff" opacity="0.06"/>
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.47-.148-.67.15-.198.297-.768.967-.942 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.884-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.447-.52.149-.173.198-.297.298-.495.1-.198.05-.372-.025-.521-.075-.149-.67-1.612-.916-2.206-.242-.579-.487-.5-.67-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.064 2.876 1.213 3.074c.149.198 2.1 3.2 5.076 4.487 2.977 1.289 2.977.859 3.513.804.536-.049 1.758-.718 2.006-1.412.248-.695.248-1.29.173-1.412-.074-.123-.273-.198-.57-.347z" fill="#fff"/>
+    </svg>
+  </a>
+
+  <script>
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        e.preventDefault();
+        const t = document.querySelector(a.getAttribute('href'));
+        if(t) t.scrollIntoView({behavior:'smooth',block:'start'});
+      })
+    })
+
+    // Trigger on-scroll animations
+    const obs = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          e.target.classList.add('in-view');
+        }
+      });
+    },{threshold:0.12});
+    document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+
+    // Add small glow on link hover
+    document.querySelectorAll('.btn-glow').forEach(b=>{
+      b.addEventListener('mouseenter', ()=>{b.style.boxShadow='0 10px 40px rgba(0,212,255,0.15),0 2px 18px rgba(58,242,122,0.06)'});
+      b.addEventListener('mouseleave', ()=>{b.style.boxShadow='0 6px 30px rgba(0,212,255,0.08),0 2px 10px rgba(58,242,122,0.04)'});
+    });
+
+  </script>
+</body>
+</html>
